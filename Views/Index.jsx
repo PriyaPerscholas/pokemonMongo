@@ -1,5 +1,5 @@
 const React = require('react')
-// const DefaultLayout = require('./layouts/default');
+//const DefaultLayout = require('./layout/default');
 const myStyle = {
        color: 'black',
        backgroundColor: 'lightcoral',
@@ -22,6 +22,12 @@ class Index extends React.Component {
                                                                <h2>{poke.name.charAt(0).toUpperCase(0) + poke.name.slice(1)}</h2>
                                                                <br></br>
                                                         </a>
+                                                        <form action={`/pokemon/${poke._id}?_method=DELETE`} method="POST">
+                                                               <input type="submit" value="DELETE" />
+                                                        </form>
+                                                        <br></br>
+
+                                                        <a href={`/pokemon/${poke._id}/edit`}>Edit This Pokemon</a>
                                                  </li>
                                           );
                                    })}
