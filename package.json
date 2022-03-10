@@ -1,6 +1,9 @@
 {
   "name": "github.io.pokemonappmongo",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.13.2"
+  },
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,9 +16,17 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-react-views": "^0.11.0",
-    "mongoose": "^6.2.4",
+    "mongoose": "^6.2.5",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
-  "description": ""
+  "description": "The User Stories\r When a user goes to the /pokemon route they will see an index of pokemon: the names of each pokemon rendered to the page.\r When a user clicks on the name of the pokemon, they will be taken to that pokemon's show page, and will see the pokemon's name and image.\r When a user goes to /pokemon/new a user sees a form that allows them to create a brand new pokemon, and then redirects the user back to /pokemon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PriyaPerscholas/pokemonMongo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PriyaPerscholas/pokemonMongo/issues"
+  },
+  "homepage": "https://github.com/PriyaPerscholas/pokemonMongo#readme"
 }
