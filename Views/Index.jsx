@@ -1,18 +1,12 @@
 const React = require('react')
-//const DefaultLayout = require('./layout/default');
-const myStyle = {
-       color: 'black',
-       backgroundColor: 'lightcoral',
-       minheight: '100vh',
-       maxwidth: '400px',
-       margin: 0,
+const DefaultLayout = require('./layout/default');
 
-}
 class Index extends React.Component {
        render() {
               const { pokemon } = this.props;
               return (
-                     <div style={myStyle}>
+                     <div>
+                            <link rel="stylesheet" href="/css/app.css" />
                             <h1>'See All The Pokemon!'</h1>
                             <ul >
                                    {pokemon.map((poke, i) => {
@@ -26,7 +20,6 @@ class Index extends React.Component {
                                                                <input type="submit" value="DELETE" />
                                                         </form>
                                                         <br></br>
-
                                                         <a href={`/pokemon/${poke._id}/edit`}>Edit This Pokemon</a>
                                                  </li>
                                           );

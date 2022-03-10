@@ -12,10 +12,9 @@ app.use((req, res, next) => {
        console.log('I run for all routes')
        next()
 })
-//keep this near the top 
 app.use(express.urlencoded({ extened: true }))
-
 app.use(methodOverride('_method'));
+app.use(express.static('public')); //tells express to try to match requests with files in the directory called 'public'
 
 app.get('/pokemon/seed', (req, res) => {
        Pokemon.create([
@@ -42,7 +41,7 @@ app.get('/', function (req, res) {
 })
 
 //index route : Show ALL 
-app.get('/pokemon', function (req, res) {
+app.get('/pokemon', (req, res) => {
        Pokemon.find({}, (error, allPokemon) => {
               res.render('Index', {
                      pokemon: allPokemon
@@ -63,6 +62,14 @@ app.post('/pokemon/', (req, res) => {
        })
 })
 
+
+//show route 
+app.get('/pokemon/:id', function (req, res) {
+       Pokemon.findById(req.params.id, (err, foundPokemon) => {
+              res.render('Show', { pokemon: foundPokemon })
+       })
+})
+
 //delete route
 app.delete('/pokemon/:id', (req, res) => {
        Pokemon.findByIdAndRemove(req.params.id, (err, data) => {
@@ -70,13 +77,14 @@ app.delete('/pokemon/:id', (req, res) => {
        });
 });
 
+//edit route
 app.get('/pokemon/:id/edit', (req, res) => {
        Pokemon.findById(req.params.id, (err, foundPokemon) => { //find the pokemon
               if (!err) {
                      res.render(
                             'Edit',
                             {
-                                   fruit: foundPokemon //pass in found fruit
+                                   pokemon: foundPokemon //pass in found fruit
                             }
                      );
               } else {
@@ -85,15 +93,11 @@ app.get('/pokemon/:id/edit', (req, res) => {
        });
 });
 
+//
 app.put('/pokemon/:id', (req, res) => {
-       res.send(req.body);
-})
-
-//show route 
-app.get('/pokemon/:id', function (req, res) {
-       Pokemon.findById(req.params.id, (err, foundPokemon) => {
-              res.render('Show', { pokemon: foundPokemon })
-       })
+       Pokemon.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
+              res.redirect('/pokemon');
+       });
 })
 
 //connect to mongo database
