@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const pokemon = require('./Models/pokemon.js')
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3000
 
 //MUST BE FIRST 
 //middleware
@@ -10,9 +11,23 @@ app.use((req, res, next) => {
        console.log('I run for all routes')
        next()
 })
-
 //keep this near the top 
 app.use(express.urlencoded({ extened: true }))
+
+app.get('/pokemon/seed', (req, res) => {
+       Pokemon.create([
+              { name: "bulbasaur", img: "http://img.pokemondb.net/artwork/bulbasaur" },
+              { name: "ivysaur", img: "http://img.pokemondb.net/artwork/ivysaur" },
+              { name: "venusaur", img: "http://img.pokemondb.net/artwork/venusaur" },
+              { name: "charmander", img: "http://img.pokemondb.net/artwork/charmander" },
+              { name: "charizard", img: "http://img.pokemondb.net/artwork/charizard" },
+              { name: "squirtle", img: "http://img.pokemondb.net/artwork/squirtle" },
+              { name: "wartortle", img: "http://img.pokemondb.net/artwork/wartortle" }],
+              (err, data) => {
+                     res.redirect('/pokemon');
+              })
+});
+
 
 //set up view engine above routes
 app.set('view engine', 'jsx')
@@ -58,6 +73,6 @@ mongoose.connection.once('open', () => {
        console.log('connected to mongo')
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
        console.log("listening")
 })

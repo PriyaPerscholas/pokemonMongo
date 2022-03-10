@@ -1,4 +1,5 @@
 const React = require('react')
+// const DefaultLayout = require('./layouts/default');
 const myStyle = {
        color: 'black',
        backgroundColor: 'lightcoral',
@@ -16,7 +17,7 @@ class Index extends React.Component {
                             <ul >
                                    {pokemon.map((poke, i) => {
                                           return (
-                                                 <li>
+                                                 <li key={pokemon._id}>
                                                         <a href={`/pokemon/${poke.id}`}>
                                                                <h2>{poke.name.charAt(0).toUpperCase(0) + poke.name.slice(1)}</h2>
                                                                <br></br>
@@ -34,4 +35,9 @@ class Index extends React.Component {
        }
 }
 module.exports = Index
+
+
+
+
+
 
