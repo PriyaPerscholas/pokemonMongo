@@ -36,9 +36,9 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
 // define root route
-app.get('/', function (req, res) {
-       res.send(`<h1>Welcome to Pokemon App !</h1>`)
-})
+// app.get('/', function (req, res) {
+//        res.send(`<h1>Welcome to Pokemon App !</h1>`)
+// })
 
 //index route : Show ALL 
 app.get('/pokemon', (req, res) => {
