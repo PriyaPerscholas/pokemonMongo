@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const pokemon = require('./Models/pokemon.js')
+const Pokemon = require('./Models/pokemon.js')
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000
 const methodOverride = require('method-override');
@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 
 //index route : Show ALL 
 app.get('/pokemon', function (req, res) {
-       pokemon.find({}, (error, allPokemon) => {
+       Pokemon.find({}, (error, allPokemon) => {
               res.render('Index', {
                      pokemon: allPokemon
               })
@@ -58,20 +58,20 @@ app.get('/pokemon/new', (req, res) => {
 
 //form POST 
 app.post('/pokemon/', (req, res) => {
-       pokemon.create(req.body, (error, createdPokemon) => {
+       Pokemon.create(req.body, (error, createdPokemon) => {
               res.redirect('/pokemon')
        })
 })
 
 //delete route
 app.delete('/pokemon/:id', (req, res) => {
-       pokemon.findByIdAndRemove(req.params.id, (err, data) => {
+       Pokemon.findByIdAndRemove(req.params.id, (err, data) => {
               res.redirect('/pokemon');//redirect back to fruits index
        });
 });
 
 app.get('/pokemon/:id/edit', (req, res) => {
-       pokemon.findById(req.params.id, (err, foundPokemon) => { //find the pokemon
+       Pokemon.findById(req.params.id, (err, foundPokemon) => { //find the pokemon
               if (!err) {
                      res.render(
                             'Edit',
@@ -85,9 +85,13 @@ app.get('/pokemon/:id/edit', (req, res) => {
        });
 });
 
+app.put('/pokemon/:id', (req, res) => {
+       res.send(req.body);
+})
+
 //show route 
 app.get('/pokemon/:id', function (req, res) {
-       pokemon.findById(req.params.id, (err, foundPokemon) => {
+       Pokemon.findById(req.params.id, (err, foundPokemon) => {
               res.render('Show', { pokemon: foundPokemon })
        })
 })
